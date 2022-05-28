@@ -26,7 +26,6 @@ setuptools.setup(
     classifiers=classifiers,
 	license='MIT',
 	keywords=['numbers', 'number', 'limit', 'limited'],
-    package_dir={"": "limited-numbers"},
-    packages=['limited-numbers'],
+    packages=setuptools.find_packages(),
     python_requires=">=3.6",
 )
