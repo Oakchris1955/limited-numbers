@@ -30,6 +30,12 @@ class Int:
 		else:
 			return local_number
 
+	#define a get function to return self.number (although user can just use Int.number instead)
+	def get(self):
+		'''You can use Int.number instead'''
+		return self.number
+
+	#Some functions to make addition and subtraction possible
 	def __add__(self, other:int) -> int:
 		return self._handle_update(self.number + other)
 
