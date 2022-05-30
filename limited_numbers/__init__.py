@@ -3,37 +3,50 @@ class Int:
 		self.number = number
 		self.limit = limit
 		self.begin_from = begin_from
+		#also, check if number is overflowed
+		self._handle_update()
 
-	def _handle_update(self):
+	def _handle_update(self, input_number=None):
 		'''Handles any number updates'''
-		#if number is below limit
-		if self.number < self.begin_from:
-			#get the difference
-			difference = self.begin_from-self.number
-			#update the number
-			self.number = self.limit-difference
-		#if number is above limit
-		elif self.number > self.limit:
-			#get the difference
-			difference = self.number-self.limit
-			#update the number
-			self.number = self.begin_from-difference
+		#save number as a local variable
+		if input_number:
+			local_number = input_number
+		else:
+			local_number = self.number
+		
+		#get the difference
+		difference = self.limit-self.begin_from
+		#divide to see how many times our number fits in difference
+		fits = local_number//difference
+		#update the number
+		if local_number < self.begin_from:
+			local_number -= fits*difference
+		elif local_number > self.limit:
+			local_number += fits*difference
+
+		#check whether to save the non-overflowed number to self.number or just return it
+		if not input_number:
+			self.number = local_number
+		else:
+			return local_number
 
 	def __add__(self, other:int) -> int:
-		return self.number + other
+		return self._handle_update(self.number + other)
 
 	def __radd__(self, other:int) -> int:
-		return self.number + other
+		return self._handle_update(self.number + other)
 	
 	def __iadd__(self, other:int) -> None:
 		self.number += other
+		self._handle_update()
 
 
 	def __sub__(self, other:int) -> int:
-		return self.number - other
+		return self._handle_update(self.number - other)
 
 	def __rsub__(self, other:int) -> int:
-		return self.number - other
+		return self._handle_update(self.number - other)
 	
 	def __isub__(self, other:int) -> None:
 		self.number -= other
+		self._handle_update()
