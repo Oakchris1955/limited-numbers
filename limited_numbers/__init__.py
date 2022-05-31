@@ -1,5 +1,5 @@
 class Int:
-	def __init__(self, number: int, limit: int, begin_from: int=0) -> None:
+	def __init__(self, limit: int, number: int=0, begin_from: int=0) -> None:
 		self.number = number
 		self.limit = limit
 		self.begin_from = begin_from
