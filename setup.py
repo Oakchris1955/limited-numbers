@@ -14,7 +14,7 @@ classifiers = [
 
 setuptools.setup(
     name="limited-numbers",
-    version="1.0",
+    version="1.1.0",
     author="Oakchris1955",
     description="A simple package to limit numbers to a marked area (can be used to simulate number overflows)",
     long_description=long_description,
